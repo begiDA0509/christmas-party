@@ -7,6 +7,7 @@
 <meta name="description" content="One night. Good food. Games. Dance. Pictures. Get your ticket for the Christmas Party hosted by Pragya Jha & Achyutam Jha.">
 <meta name="theme-color" content="#a3161f">
 <meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
 <style>
 /*
 VOICE: warm, festive, premium — a private family party, not an events company.
@@ -88,6 +89,7 @@ button,input{font:inherit}
 .venue .v1{font-family:"Playfair Display",serif;font-weight:700;font-size:21px;color:var(--pine)}
 .venue .v2{font-style:italic;color:var(--pine2)}
 .hosted{margin-top:18px}.hosted .script{font-size:34px;color:var(--berry);line-height:1}.hosted .disp{font-size:21px}
+.privbox{max-width:440px;margin:32px auto 0;text-align:center;padding:22px}
 .cta{margin-top:32px;display:flex;flex-direction:column;align-items:center;gap:14px}
 .deco-tree{position:absolute;left:-10px;top:120px;height:620px;z-index:1;pointer-events:none}
 .deco-branch{position:absolute;right:0;top:20px;height:250px;z-index:1;pointer-events:none}
@@ -175,13 +177,13 @@ td{padding:11px 12px;border-top:1px solid rgba(201,151,58,.25);vertical-align:mi
 td.tidc{font-family:"Playfair Display",serif;font-weight:700;color:var(--berry);white-space:nowrap}
 td.nowrap{white-space:nowrap}
 .pill{display:inline-block;white-space:nowrap;border-radius:999px;padding:4px 10px;font-size:13px;font-weight:600}
-.pill.in{background:rgba(31,74,44,.12);color:var(--pine)}.pill.out{background:rgba(201,151,58,.18);color:#8a6418}
+.pill.in{background:rgba(31,74,44,.12);color:var(--pine)}.pill.rev{background:rgba(43,29,20,.1);color:var(--muted)}.nick{font-family:"Great Vibes",cursive;font-size:22px;color:var(--berry);line-height:1}.pill.out{background:rgba(201,151,58,.18);color:#8a6418}
 .ra{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
 .ra button{border:0;border-radius:999px;padding:8px 12px;min-height:36px;font-size:13px;font-weight:600;cursor:pointer;background:#f6e7cc;color:var(--ink)}
 .ra .ci{background:var(--pine);color:#fff9ee}.ra .del{background:none;color:var(--berry)}
 .empty{text-align:center;font-style:italic;color:var(--muted);padding:30px}
 @media(max-width:600px){table{font-size:14px}.stack thead{display:none}.stack tr{display:grid;padding:10px 12px;border-top:1px solid rgba(201,151,58,.3)}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:7.5em;text-align:start;white-space:normal}.stack td::before{content:attr(data-l);float:inline-start;width:7em;margin-inline-start:-7.5em;font-family:Cinzel,serif;font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}.stack td:empty{display:none}.ra{justify-content:flex-start}}
-.addf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+.addf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}
 @media(max-width:700px){.addf{grid-template-columns:1fr}}
 .chk{display:flex;gap:10px;align-items:center;font-size:15px}.chk input{width:22px;height:22px;accent-color:var(--berry)}
 
@@ -250,16 +252,19 @@ td.nowrap{white-space:nowrap}
     <div class="date ribbon g">25 December 2026 <b>·</b> 6:30 PM</div><br>
     <div class="venue"><i data-pin></i><div><div class="v1">Basement of Jha Residency</div><div class="v2">Krishna Park, New Delhi</div></div></div>
     <div class="hosted"><div class="script">Hosted by</div><div class="disp">Pragya Jha &amp; Achyutam Jha</div></div>
-    <div class="cta">
+    <div class="cta hidden" id="ctaInvited">
       <a class="btn btn-red btn-big" href="#register">🎟️ Get my ticket</a>
-      <a class="link" href="#find">Already registered? Find my ticket</a>
+    </div>
+    <div class="card paper privbox" id="ctaPrivate">
+      <div class="disp red" style="font-size:24px;line-height:1.2">🎄 This is a private Christmas party.</div>
+      <p style="margin:8px 0 0;color:var(--muted)">Please use your personal invitation link to register.</p>
     </div>
   </div>
   <div class="polas" id="polas"></div>
   <div style="text-align:center;padding:0 16px 56px;position:relative;z-index:2">
     <div data-bow style="width:84px;margin:0 auto"></div>
     <p class="disp" style="font-style:italic;font-size:24px;color:var(--pine);margin:10px 0 18px">Bring your festive best. We’ll bring the magic.</p>
-    <a class="btn btn-green" href="#register">Create my ticket 🎄</a>
+    <a class="btn btn-green hidden" id="ctaInvited2" href="#register">Create my ticket 🎄</a>
   </div>
   <footer>Christmas Party · 25 December 2026 · Krishna Park, New Delhi<br><button type="button" onclick="location.hash='admin'">Hosts</button></footer>
 </section>
@@ -269,55 +274,33 @@ td.nowrap{white-space:nowrap}
   <div class="garland"></div><div class="lights" data-lights="12"></div>
   <div class="topmark"><a href="#"><span>🎄</span><span class="red">CHRISTMAS</span><i class="green">Party</i></a></div>
   <div class="narrow">
-    <h1 class="pagetitle disp">Get your ticket</h1>
+    <h1 class="pagetitle disp">🎄 Welcome to the Christmas Party</h1>
     <p class="sub">25 December 2026 · 6:30 PM · Basement of Jha Residency</p>
-    <form id="regForm" class="card paper stack-gap" style="margin-top:26px" novalidate>
+    <form id="regForm" class="card paper stack-gap hidden" style="margin-top:26px" novalidate>
       <div data-holly style="position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:64px"></div>
       <div><label class="label" for="rName">Full name *</label><input class="field" id="rName" autocomplete="name" maxlength="80" placeholder="e.g. Aditi Sharma"><p class="err hidden" id="eName"></p></div>
-      <div><label class="label" for="rPhone">Phone number *</label><div class="prefix"><span>+91</span><input class="field" id="rPhone" type="tel" inputmode="tel" autocomplete="tel-national" maxlength="18" placeholder="98765 43210"></div><p class="err hidden" id="ePhone"></p></div>
-      <div><label class="label" for="rEmail">E-mail address <small>(optional)</small></label><input class="field" id="rEmail" type="email" inputmode="email" autocomplete="email" maxlength="120" placeholder="you@example.com"><p class="err hidden" id="eEmail"></p></div>
-      <div id="codeRow" class="hidden"><label class="label" for="rCode">Invite code *</label><input class="field" id="rCode" autocomplete="off" maxlength="40" placeholder="From your invitation" style="text-transform:uppercase;letter-spacing:.12em"><p class="err hidden" id="eCode"></p></div>
+      <div><label class="label" for="rNick">✨ Choose your Christmas nickname *</label><input class="field" id="rNick" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="24" placeholder="e.g. SnowQueen">
+        <p style="margin:6px 0 0;font-size:14px;color:var(--muted)">Pick something fun and unique — this will be your Christmas identity on the guest list and ticket. Examples: <b>SnowQueen</b>, <b>JinglePragya</b>, <b>Rudolph27</b>, <b>ChristmasQueen</b>. Letters, numbers, - _ . only (3–24).</p>
+        <p class="err hidden" id="eNick"></p></div>
       <p class="note hidden" id="eForm"></p>
       <button class="btn btn-red w100" id="rBtn" type="submit">Create my Christmas ticket 🎄</button>
     </form>
-    <div id="regDup" class="card paper hidden" style="margin-top:26px;text-align:center">
-      <div style="font-size:48px">🎄</div>
-      <h2 class="disp red" style="font-size:26px;margin-top:6px">You already have a Christmas ticket 🎄</h2>
-      <p style="color:var(--muted)">This phone number is already registered — your ticket is waiting.</p>
-      <button class="btn btn-red w100" id="dupView" type="button">View my ticket</button>
-      <button class="link" id="dupBack" type="button" style="margin-top:12px">Register someone else</button>
-    </div>
-    <div id="regClosed" class="card paper hidden" style="margin-top:26px;text-align:center">
-      <div style="font-size:48px">✉️</div>
-      <h2 class="disp red" style="font-size:26px;margin-top:6px" id="closedT">Registration is closed</h2>
-      <p style="color:var(--muted)" id="closedP">Please contact Pragya or Achyutam for a ticket.</p>
+    <div id="regClosed" class="card paper" style="margin-top:26px;text-align:center">
+      <div style="font-size:48px" id="closedE">🎄</div>
+      <h2 class="disp red" style="font-size:26px;margin-top:6px" id="closedT">This is a private Christmas party.</h2>
+      <p style="color:var(--muted)" id="closedP">Please use your personal invitation link to register.</p>
       <button class="link" type="button" onclick="location.hash=''">Back to the invitation</button>
     </div>
   </div>
 </section>
 
-<!-- ================= GUEST: FIND ================= -->
-<section class="view bg" id="v-find">
-  <div class="garland"></div><div class="lights" data-lights="12"></div>
-  <div class="topmark"><a href="#"><span>🎄</span><span class="red">CHRISTMAS</span><i class="green">Party</i></a></div>
-  <div class="narrow">
-    <form id="findForm" class="card paper" style="margin-top:20px;text-align:center" novalidate>
-      <div data-orn="#a3161f" data-s=".8" style="margin:-10px auto 0;width:40px"></div>
-      <h1 class="disp red" style="font-size:34px">Find my ticket</h1>
-      <p style="color:var(--muted);margin:4px 0 18px">Enter the phone number you registered with.</p>
-      <div class="prefix" style="text-align:left"><span>+91</span><input class="field" id="fPhone" type="tel" inputmode="tel" maxlength="18" placeholder="98765 43210" aria-label="Phone number"></div>
-      <p class="note hidden" id="fErr" style="margin-top:14px"></p>
-      <button class="btn btn-red w100" style="margin-top:18px" type="submit">Show my ticket 🎟️</button>
-    </form>
-  </div>
-</section>
 
 <!-- ================= GUEST: TICKET ================= -->
 <section class="view bg" id="v-ticket">
   <div class="garland"></div><div class="lights" data-lights="14"></div>
   <div class="topmark"><a href="#"><span>🎄</span><span class="red">CHRISTMAS</span><i class="green">Party</i></a></div>
   <div class="wrap" style="padding-top:16px;padding-bottom:60px;position:relative;z-index:2">
-    <h1 class="disp red" id="tHead" style="text-align:center;font-size:clamp(28px,6vw,40px)">🎄 Your Christmas Ticket Is Ready!</h1>
+    <h1 class="disp red" id="tHead" style="text-align:center;font-size:clamp(28px,6vw,40px)">🎟️ YOUR CHRISTMAS TICKET</h1>
     <p class="sub" id="tSub">Show this QR code at the entrance. Save it to your phone.</p>
     <div style="margin-top:22px" id="tShow"></div>
     <div class="actions">
@@ -325,11 +308,11 @@ td.nowrap{white-space:nowrap}
       <button class="btn btn-green" id="aShare" type="button">📤 Share ticket</button>
     </div>
     <div class="actions" style="margin-top:12px">
-      <button class="btn btn-ghost" id="aCopy" type="button">🔗 Copy ticket link</button>
+      <button class="btn btn-ghost" id="aCopy" type="button">🔗 Copy private ticket link</button>
       <button class="btn btn-ghost" id="aPdf" type="button">📄 Download PDF</button>
     </div>
     <p class="status" id="tStatus" role="status"></p>
-    <p style="text-align:center;font-size:13px;color:var(--muted);max-width:460px;margin:6px auto 0">Keep your ticket link private — it is your entry pass. Lost it? Use “Find my ticket” with your phone number.</p>
+    <p style="text-align:center;font-size:13px;color:var(--muted);max-width:480px;margin:10px auto 0;font-size:15px!important;color:var(--berry)!important"><b>Save this ticket or private ticket link.</b> There is no phone-number or email-based ticket recovery. Keep the link private — it is your entry pass.</p>
   </div>
 </section>
 
@@ -372,19 +355,31 @@ td.nowrap{white-space:nowrap}
       <div class="stat paper"><div class="k">Not checked in</div><div class="v" style="color:#8a6418" id="sOut">…</div></div>
       <div class="stat paper"><div class="k">Check-in rate</div><div class="v" id="sRate">…</div></div>
     </div>
+    <section class="box paper" id="invBox">
+      <h2 class="disp red" style="font-size:26px">✉️ Invitations</h2>
+      <p style="margin:4px 0 12px;color:var(--muted);font-size:15px">Each link lets exactly one person create one ticket. The label is only for you — guests never see it.</p>
+      <form id="invForm" class="inl" novalidate>
+        <div><label class="label" for="invLabel">Label (optional)</label><input class="field" id="invLabel" maxlength="60" placeholder="e.g. Aditi, Rohan’s +1"></div>
+        <div style="flex:0 1 120px"><label class="label" for="invCount">How many</label><input class="field" id="invCount" inputmode="numeric" value="1" maxlength="2"></div>
+        <button class="btn btn-red" type="submit">Create invitation</button>
+      </form>
+      <div class="chips" id="invStats" style="margin-top:14px"></div>
+      <table class="stack" id="invTable"><thead><tr><th>Invite</th><th>Status</th><th>Guest</th><th style="text-align:right">Action</th></tr></thead><tbody id="invBody"></tbody></table>
+      <p class="empty hidden" id="invEmpty">No invitations yet — create one above.</p>
+    </section>
     <form class="box paper" id="manForm" novalidate>
       <div class="inl"><div><label class="label" for="manId">Manual check-in — Ticket ID</label><input class="field" id="manId" placeholder="XMAS-001" style="text-transform:uppercase"></div><button class="btn btn-green" type="submit">Search ticket</button></div>
       <div id="manRes" style="margin-top:16px"></div>
     </form>
     <div style="margin-top:26px">
-      <input class="field" id="q" placeholder="🔎 Search guest name / phone / ticket ID" aria-label="Search guests" style="font-size:18px;min-height:58px">
+      <input class="field" id="q" placeholder="🔎 Search guest name / nickname / ticket ID" aria-label="Search guests" style="font-size:18px;min-height:58px">
       <div class="chips" id="chips">
         <button class="chip on" data-f="all" type="button">All</button>
         <button class="chip" data-f="in" type="button">✅ Checked in</button>
         <button class="chip" data-f="out" type="button">⏳ Not checked in</button>
         <button class="chip sort" id="sortBtn" type="button">Registered: newest first ↓</button>
       </div>
-      <table class="stack"><thead><tr><th>Ticket ID</th><th>Guest</th><th>Phone</th><th>Email</th><th>Registered</th><th>Status</th><th style="text-align:right">Actions</th></tr></thead><tbody id="tbody"></tbody></table>
+      <table class="stack"><thead><tr><th>Ticket ID</th><th>Guest</th><th>Nickname</th><th>Registered</th><th>Status</th><th>Invitation</th><th style="text-align:right">Actions</th></tr></thead><tbody id="tbody"></tbody></table>
       <p class="empty hidden" id="empty"></p>
     </div>
     <div style="margin-top:32px">
@@ -392,21 +387,19 @@ td.nowrap{white-space:nowrap}
       <form id="addForm" class="box paper hidden" novalidate>
         <div class="addf">
           <input class="field" id="adName" placeholder="Full name *" aria-label="Full name">
-          <input class="field" id="adPhone" placeholder="Phone *" inputmode="tel" aria-label="Phone">
-          <input class="field" id="adEmail" placeholder="E-mail (optional)" aria-label="E-mail">
+          <input class="field" id="adNick" placeholder="Christmas nickname *" aria-label="Christmas nickname" autocapitalize="off" maxlength="24">
         </div>
-        <label class="chk" style="margin-top:12px"><input type="checkbox" id="adDup"> Allow the same phone number as another guest (e.g. family sharing one phone)</label>
+        <p style="margin:8px 0 0;font-size:14px;color:var(--muted)">Host override — no invitation needed. The nickname must still be unique.</p>
         <p class="err hidden" id="adErr"></p>
         <button class="btn btn-red" style="margin-top:12px" type="submit">Create ticket</button>
       </form>
     </div>
     <div class="box paper" style="margin-top:28px">
-      <label class="chk"><input type="checkbox" id="regOpen" checked> Guests can create tickets on the website</label>
-      <div class="inl" style="margin-top:10px"><div><label class="label" for="pCode">Invite code (blank = anyone with the link)</label><input class="field" id="pCode" maxlength="40" placeholder="e.g. JINGLE26" style="text-transform:uppercase"></div><div><label class="label" for="maxG">Ticket limit (blank = no limit)</label><input class="field" id="maxG" inputmode="numeric" placeholder="e.g. 60"></div><button class="btn btn-green" type="button" id="saveSet">Save</button></div>
-      <div id="invWrap" class="hidden" style="margin-top:14px"><div class="label">Invite link to share with guests</div><div class="inl"><div><input class="field" id="invLink" readonly></div><button class="btn btn-ghost" type="button" id="invCopy">Copy invite link</button></div><p style="font-size:14px;color:var(--muted);margin:6px 0 0">Only people who open this link (or type the code) can get a ticket.</p></div>
+      <label class="chk"><input type="checkbox" id="regOpen" checked> Invited guests can create tickets</label>
+      <div class="inl" style="margin-top:10px"><div><label class="label" for="maxG">Ticket limit (blank = no limit)</label><input class="field" id="maxG" inputmode="numeric" placeholder="e.g. 60"></div><button class="btn btn-green" type="button" id="saveSet">Save</button></div>
     </div>
     <div style="margin-top:40px;border-top:1px dashed rgba(163,22,31,.35);padding-top:16px">
-      <button class="link" style="color:var(--berry)" id="resetBtn" type="button">Clear all guests (remove test data)</button>
+      <button class="link" style="color:var(--berry)" id="resetBtn" type="button">Clear all guests and invitations (remove test data)</button>
     </div>
   </div>
 
@@ -13322,14 +13315,10 @@ function decorate() {
 }
 
 /* ---------- validation ---------- */
-function normPhone(s) {
-  let d = String(s || '').replace(/\D/g, '');
-  if (d.length === 12 && d.startsWith('91')) d = d.slice(2); else if (d.length === 11 && d.startsWith('0')) d = d.slice(1); else if (d.length === 13 && d.startsWith('091')) d = d.slice(3);
-  if (d.length === 10) return /^[6-9]/.test(d) ? d : null;
-  return d.length >= 11 && d.length <= 15 ? d : null;
-}
 function cleanName(s) { const n = String(s || '').replace(/\s+/g, ' ').trim(); if (n.length < 2 || n.length > 80 || !/\p{L}/u.test(n) || /[<>{}\[\]\\\/@#$%^*=|~`]/.test(n)) return null; return n; }
-function cleanEmail(s) { const e = String(s || '').trim().toLowerCase(); if (!e) return null; return e.length <= 120 && /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(e) ? e : false; }
+function cleanEmail(s) { const e = String(s || '').trim().toLowerCase(); if (!e) return null; return e.length <= 120 && /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(e) ? e : false; } // host login only
+function cleanNick(s) { const n = String(s || '').trim(); return /^[\p{L}\p{N}_.-]{3,24}$/u.test(n) ? n : null; }
+const INVITE_RE = /^[0-9a-f]{64}$/;
 function normTid(s) { const m = String(s || '').trim().toUpperCase().match(/^(?:XMAS)?\s*-?\s*(\d{1,6})$/); return m ? 'XMAS-' + m[1].replace(/^0+(?=\d)/, '').padStart(3, '0') : null; }
 const TOKEN_RE = /^XMAS-2026-[0-9A-F]{32}$/;
 function newToken() { const b = new Uint8Array(16); crypto.getRandomValues(b); return 'XMAS-2026-' + [...b].map((x) => x.toString(16).padStart(2, '0')).join('').toUpperCase(); }
@@ -13394,13 +13383,13 @@ function ticketWide(t) {
       <div class="tid" style="font-size:30px">${esc(t.ticketId)}</div>
       <div class="lab" style="font-size:12px;margin-top:8px">GUEST</div>
       <div class="gname" style="font-size:${nameSize(t.name, 26)}px;max-width:250px">${esc(t.name)}</div>
-      <div style="width:48px;margin-top:8px">${SVG.bow}</div>
+      <div class="script" style="font-size:${t.nickname.length > 16 ? 22 : 27}px;color:#a3161f;line-height:1.1;margin-top:2px;max-width:260px;overflow-wrap:anywhere">${esc(t.nickname)}</div>
     </div>
   </div></div>`;
 }
 function ticketTall(t) {
   const Y = 500, notch = `radial-gradient(circle 18px at 0 ${Y}px,transparent 17px,#000 18px),radial-gradient(circle 18px at 100% ${Y}px,transparent 17px,#000 18px)`;
-  return `<div class="tk" style="width:420px;height:900px">
+  return `<div class="tk" style="width:420px;height:950px">
   <div class="frame" style="border-radius:28px;-webkit-mask-image:${notch};mask-image:${notch};-webkit-mask-composite:source-in;mask-composite:intersect"></div>
   <div class="pap" style="inset:11px;border-radius:18px">
     <div class="hair" style="inset:7px"></div>
@@ -13422,7 +13411,7 @@ function ticketTall(t) {
       <div class="qrbox" style="margin-top:12px"><img src="${t.qr}" width="250" height="250" alt="Ticket QR code"></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;width:100%;padding:0 30px;margin-top:12px">
         <div style="border-right:1px solid rgba(163,22,31,.3);padding-right:8px"><div class="lab" style="font-size:11px">TICKET ID</div><div class="tid" style="font-size:22px">${esc(t.ticketId)}</div></div>
-        <div style="padding-left:8px"><div class="lab" style="font-size:11px">GUEST</div><div class="gname" style="font-size:${nameSize(t.name, 20)}px">${esc(t.name)}</div></div>
+        <div style="padding-left:8px"><div class="lab" style="font-size:11px">GUEST</div><div class="gname" style="font-size:${nameSize(t.name, 20)}px">${esc(t.name)}</div><div class="script" style="font-size:${t.nickname.length > 14 ? 18 : 22}px;color:#a3161f;line-height:1.1;overflow-wrap:anywhere">${esc(t.nickname)}</div></div>
       </div>
     </div>
   </div></div>`;
@@ -13451,15 +13440,22 @@ function showErr(id, msg) { const e = $(id); if (!e) return; e.textContent = msg
 const fromEmailLink = /access_token=|error_description=|type=magiclink|type=signup/.test(location.hash);
 const linkError = (location.hash.match(/error_description=([^&]+)/) || [])[1];
 const sb = window.supabase.createClient('https://evbpfrymevfqpogigdrz.supabase.co', 'sb_publishable_OX8Awdb6wH9W0Rsh5IQb9w_97Q49wfB', { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'implicit' } });
-let inviteCode = (() => { const c = new URLSearchParams(location.search).get('code'); try { if (c) sessionStorage.setItem('xcode', c); return c || sessionStorage.getItem('xcode') || ''; } catch { return c || ''; } })();
+// Paths: <base>/invite/<token>, <base>/ticket/<token>, <base>/admin  (GitHub Pages serves 404.html = this page)
+const PATH_M = location.pathname.match(/^(.*?\/)(?:index\.html|404\.html|invite\/([^/]+)\/?|ticket\/([^/]+)\/?|(admin)\/?)?$/);
+const BASE = PATH_M ? PATH_M[1] : '/';
+const pathInvite = PATH_M && PATH_M[2] ? decodeURIComponent(PATH_M[2]).toLowerCase() : null;
+const pathTicket = PATH_M && PATH_M[3] ? decodeURIComponent(PATH_M[3]).toUpperCase() : null;
+const pathAdmin = !!(PATH_M && PATH_M[4]);
+let inviteToken = null, inviteState = 'none';
+let invites = [];
 let isHost = false, hostEmail = null, guests = [], guestsLoaded = false, chan = null, pollT = null;
 const dl = true;
 async function rpc(fn, args) { const { data, error } = await sb.rpc(fn, args || {}); if (error) throw error; return data; }
-const toGuest = (r) => ({ id: r.id, token: r.qr_token, ticketId: r.ticket_id, name: r.guest_name, phone: r.phone, email: r.email || '', createdAt: r.created_at, checkedIn: r.checked_in, checkedInAt: r.checked_in_at, addedByHost: r.added_by_admin });
+const toGuest = (r) => ({ id: r.id, token: r.qr_token, ticketId: r.ticket_id, name: r.guest_name, nickname: r.nickname, createdAt: r.created_at, checkedIn: r.checked_in, checkedInAt: r.checked_in_at, addedByHost: r.added_by_admin });
 async function fetchGuests() {
   const all = [];
   for (let from = 0; ; from += 1000) {
-    const { data, error } = await sb.from('guests').select('id,ticket_id,guest_name,phone,email,qr_token,created_at,checked_in,checked_in_at,added_by_admin').order('created_at').range(from, from + 999);
+    const { data, error } = await sb.from('guests').select('id,ticket_id,guest_name,nickname,qr_token,created_at,checked_in,checked_in_at,added_by_admin').order('created_at').range(from, from + 999);
     if (error) throw error; all.push(...data.map(toGuest)); if (data.length < 1000) break;
   }
   return all;
@@ -13467,40 +13463,55 @@ async function fetchGuests() {
 let loading = false;
 async function reloadGuests() {
   if (!isHost || loading) return; loading = true;
-  try { guests = await fetchGuests(); guestsLoaded = true; $('#dbDown').classList.add('hidden'); renderAdmin(); renderParty(); }
+  try { [guests, invites] = await Promise.all([fetchGuests(), fetchInvites()]); guestsLoaded = true; renderInvites(); $('#dbDown').classList.add('hidden'); renderAdmin(); renderParty(); }
   catch { $('#dbDown').classList.remove('hidden'); } finally { loading = false; }
 }
 function subscribeGuests() {
   if (chan) return;
   reloadGuests();
-  chan = sb.channel('guests-live').on('postgres_changes', { event: '*', schema: 'public', table: 'guests' }, () => reloadGuests()).subscribe();
+  chan = sb.channel('guests-live').on('postgres_changes', { event: '*', schema: 'public', table: 'guests' }, () => reloadGuests()).on('postgres_changes', { event: '*', schema: 'public', table: 'invitations' }, () => reloadGuests()).subscribe();
   pollT = setInterval(reloadGuests, 15000);
   window.addEventListener('focus', reloadGuests);
   loadSettings();
 }
 async function ticketByToken(token) {
   const r = (await rpc('get_ticket', { p_token: token }))[0];
-  return r ? { token, ticketId: r.ticket_id, name: r.guest_name, checkedIn: r.checked_in } : null;
+  return r ? { token, ticketId: r.ticket_id, name: r.guest_name, nickname: r.nickname, checkedIn: r.checked_in } : null;
 }
-async function registerGuest(name, phone, email, allowDup, byHost) {
+async function fetchInvites() {
+  const { data, error } = await sb.from('invitations').select('id,invite_no,token,label,created_at,used_at,guest_id,revoked_at').order('invite_no');
+  if (error) throw error; return data;
+}
+// status: created | invalid | used | revoked | closed | full | bad_name | bad_nickname | nickname_taken
+async function registerGuest(name, nickname, byHost) {
   const r = byHost
-    ? (await rpc('admin_add_guest', { p_name: name, p_phone: phone, p_email: email, p_allow_duplicate: !!allowDup }))[0]
-    : (await rpc('register_guest', { p_name: name, p_phone: phone, p_email: email, p_code: inviteCode || $('#rCode').value.trim() || null }))[0];
-  if (r.status === 'badcode') throw { code: 'badcode' };
-  if (r.status === 'closed') throw { code: 'closed' };
-  if (r.status === 'full') throw { code: 'full' };
-  if (r.status === 'busy') throw { message: 'Lots of people are registering right now — please try again in a minute.' };
-  if (r.status === 'duplicate') return { status: 'duplicate', token: r.qr_token, guest: { ...(await ticketByToken(r.qr_token)), ticketId: r.ticket_id } };
+    ? (await rpc('admin_add_guest', { p_name: name, p_nickname: nickname }))[0]
+    : (await rpc('register_guest', { p_invite: inviteToken, p_name: name, p_nickname: nickname }))[0];
+  if (r.status !== 'created') return { status: r.status };
   if (byHost) reloadGuests();
-  return { status: 'created', token: r.qr_token, guest: { token: r.qr_token, ticketId: r.ticket_id, name, checkedIn: false } };
+  return { status: 'created', guest: { token: r.qr_token, ticketId: r.ticket_id, name, nickname, checkedIn: false } };
 }
-const inviteLink = (c) => location.origin + location.pathname + (c ? '?code=' + encodeURIComponent(c) : '');
-function showInvite(c) { $('#invWrap').classList.remove('hidden'); $('#invLink').value = inviteLink(c); }
 async function loadSettings() {
-  try { const r = (await rpc('admin_get_settings'))[0]; if (!r) return; $('#regOpen').checked = r.registration_open; $('#maxG').value = r.max_guests ?? ''; $('#pCode').value = r.party_code || ''; showInvite(r.party_code || ''); } catch {}
+  try { const r = (await rpc('admin_get_settings'))[0]; if (!r) return; $('#regOpen').checked = r.registration_open; $('#maxG').value = r.max_guests ?? ''; } catch {}
 }
-async function guestSettings() {
-  try { const r = (await rpc('get_settings'))[0]; if (r && r.code_required && !inviteCode) $('#codeRow').classList.remove('hidden'); } catch {}
+const inviteUrl = (tok) => location.origin + BASE + 'invite/' + tok;
+const INVITE_MSG = {
+  none: ['🎄', 'This is a private Christmas party.', 'Please use your personal invitation link to register.'],
+  invalid: ['🔒', 'This invitation link isn’t valid.', 'Please open the full link exactly as the host sent it to you.'],
+  used: ['❌', 'This invitation has already been used.', 'Each invitation creates one ticket. If this was yours, open the ticket or private ticket link you saved.'],
+  revoked: ['🚫', 'This invitation has been cancelled.', 'Please contact the host if you think this is a mistake.'],
+  closed: ['🎄', 'Registration is closed.', 'Please contact the host.'],
+  full: ['🎄', 'All tickets have been given out.', 'Please contact the host.'],
+};
+function applyInviteState(st) {
+  inviteState = st;
+  const ok = st === 'valid';
+  $('#regForm').classList.toggle('hidden', !ok);
+  $('#regClosed').classList.toggle('hidden', ok);
+  $('#ctaInvited').classList.toggle('hidden', !ok); $('#ctaInvited2').classList.toggle('hidden', !ok);
+  $('#ctaPrivate').classList.toggle('hidden', ok);
+  if (!ok) { const m = INVITE_MSG[st] || INVITE_MSG.none; $('#closedE').textContent = m[0]; $('#closedT').textContent = m[1]; $('#closedP').textContent = m[2];
+    if (st !== 'none') { $('#ctaPrivate').firstElementChild.textContent = m[0] + ' ' + m[1]; $('#ctaPrivate').lastElementChild.textContent = m[2]; } }
 }
 
 /* ---------- host sign-in (e-mail code) ---------- */
@@ -13523,7 +13534,7 @@ $('#loginForm').addEventListener('submit', async (e) => {
   try {
     if (!loginEmail) {
       const em = cleanEmail($('#lEmail').value); if (!em) { showErr('#lErr', 'Enter your e-mail address.'); return; }
-      const { error } = await sb.auth.signInWithOtp({ email: em, options: { shouldCreateUser: true, emailRedirectTo: location.origin + location.pathname } });
+      const { error } = await sb.auth.signInWithOtp({ email: em, options: { shouldCreateUser: true, emailRedirectTo: location.origin + BASE } });
       if (error) throw error;
       loginEmail = em; $('#stepEmail').classList.add('hidden'); $('#stepCode').classList.remove('hidden'); $('#lBack').classList.remove('hidden');
       $('#loginMsg').textContent = `Check ${em} and tap “Log In” in the e-mail from Supabase — open it on this same phone or computer. (It can take a minute; check spam too.) If the e-mail shows a code instead, type it below.`; btn.textContent = 'Sign in with code';
@@ -13543,7 +13554,7 @@ const doSignOut = async () => { await sb.auth.signOut(); location.hash = ''; loc
 $('#signOut').onclick = doSignOut; $('#signOut2').onclick = doSignOut;
 
 /* ---------- routing ---------- */
-const GUEST_VIEWS = ['home', 'register', 'find', 'ticket'];
+const GUEST_VIEWS = ['home', 'register', 'ticket'];
 const HOST_VIEWS = ['admin', 'scan', 'party'];
 let current = null; // ticket on screen
 function route() {
@@ -13562,65 +13573,49 @@ function route() {
     stopCam('scan'); stopCam('party');
     $('#v-' + h).classList.add('on');
   }
-  $('#snow').classList.toggle('hidden', !['home', 'register', 'find'].includes(h));
+  $('#snow').classList.toggle('hidden', !['home', 'register'].includes(h));
   window.scrollTo(0, 0);
 }
 
-/* ---------- register ---------- */
-let dupGuest = null;
+/* ---------- register (invitation required) ---------- */
 $('#regForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const name = cleanName($('#rName').value), phone = normPhone($('#rPhone').value), email = cleanEmail($('#rEmail').value);
+  const name = cleanName($('#rName').value), nick = cleanNick($('#rNick').value);
   showErr('#eName', name ? '' : 'Please enter your full name.');
-  showErr('#ePhone', phone ? '' : 'Please enter a valid 10-digit mobile number.');
-  showErr('#eEmail', email === false ? 'That e-mail address doesn’t look right.' : '');
-  showErr('#eForm', ''); showErr('#eCode', '');
-  if (!name || !phone || email === false) return;
+  showErr('#eNick', nick ? '' : 'Choose a nickname: 3–24 letters or numbers (you can use - _ . but no spaces).');
+  showErr('#eForm', '');
+  if (!name || !nick) return;
+  if (inviteState !== 'valid' || !inviteToken) return applyInviteState('none');
   const b = $('#rBtn'); b.disabled = true; b.textContent = 'Wrapping your ticket…';
   try {
-    const r = await registerGuest(name, phone, email, false, false);
-    if (r.status === 'duplicate') { dupGuest = r.guest; $('#regForm').classList.add('hidden'); $('#regDup').classList.remove('hidden'); return; }
-    $('#regForm').reset(); openTicket(r.guest, true);
+    const r = await registerGuest(name, nick, false);
+    if (r.status === 'created') { $('#regForm').reset(); inviteState = 'used'; openTicket(r.guest, true); return; }
+    if (r.status === 'nickname_taken') return showErr('#eNick', '❌ This Christmas nickname is already taken. Please choose another one.');
+    if (r.status === 'bad_nickname') return showErr('#eNick', 'Choose a nickname: 3–24 letters or numbers (you can use - _ . but no spaces).');
+    if (r.status === 'bad_name') return showErr('#eName', 'Please enter your full name (letters only).');
+    applyInviteState(INVITE_MSG[r.status] ? r.status : 'invalid');
   } catch (err) {
-    if (err && err.code === 'badcode') { inviteCode = ''; $('#codeRow').classList.remove('hidden'); showErr('#eCode', 'That invite code isn’t right. Please use the link the hosts sent you.'); }
-    else if (err && (err.code === 'closed' || err.code === 'full')) { $('#closedT').textContent = err.code === 'full' ? 'All tickets have been given out' : 'Registration is closed'; $('#regForm').classList.add('hidden'); $('#regClosed').classList.remove('hidden'); }
-    else if (err && err.code === '23514') showErr('#eForm', 'Please check your name, phone number and e-mail.');
-    else showErr('#eForm', navigator.onLine === false ? 'You seem to be offline — please try again.' : 'Something went wrong. Please try again.');
+    showErr('#eForm', navigator.onLine === false ? 'You seem to be offline — please try again.' : 'Something went wrong. Please try again.');
   } finally { b.disabled = false; b.textContent = 'Create my Christmas ticket 🎄'; }
-});
-$('#dupView').onclick = () => dupGuest && openTicket(dupGuest, false);
-$('#dupBack').onclick = () => { $('#regDup').classList.add('hidden'); $('#regForm').classList.remove('hidden'); };
-
-/* ---------- find ---------- */
-$('#findForm').addEventListener('submit', async (e) => {
-  e.preventDefault(); showErr('#fErr', '');
-  const phone = normPhone($('#fPhone').value);
-  if (!phone) return showErr('#fErr', 'Please enter the 10-digit mobile number you registered with.');
-  try {
-    const token = await rpc('find_ticket_by_phone', { p_phone: phone });
-    if (!token) return showErr('#fErr', 'No ticket is registered with that number.');
-    const g = await ticketByToken(token); if (!g) return showErr('#fErr', 'No ticket is registered with that number.');
-    openTicket(g, false);
-  } catch { showErr('#fErr', 'Something went wrong. Please try again.'); }
 });
 
 /* ---------- ticket view ---------- */
 function openTicket(g, isNew) {
-  current = { token: g.token, name: g.name, ticketId: g.ticketId, checkedIn: !!g.checkedIn, qr: qrDataUrl(g.token) };
-  $('#tHead').textContent = isNew ? '🎄 Your Christmas Ticket Is Ready!' : '🎄 Christmas Ticket';
+  current = { token: g.token, name: g.name, nickname: g.nickname || '', ticketId: g.ticketId, checkedIn: !!g.checkedIn, qr: qrDataUrl(g.token) };
+  $('#tHead').textContent = '🎟️ YOUR CHRISTMAS TICKET';
   $('#tSub').textContent = current.checkedIn ? 'Checked in — enjoy the party! ✨' : 'Show this QR code at the entrance. Save it to your phone.';
   const phone = matchMedia('(max-width: 639px)').matches;
-  if (phone) fitInto($('#tShow'), ticketTall(current), 420, 900); else fitInto($('#tShow'), ticketWide(current), 1200, 520);
+  if (phone) fitInto($('#tShow'), ticketTall(current), 420, 950); else fitInto($('#tShow'), ticketWide(current), 1200, 520);
   $('#stage').innerHTML = `<div id="stW">${ticketWide(current)}</div><div id="stT">${ticketTall(current)}</div>`;
   $('#tStatus').textContent = '';
-  history.replaceState(null, '', location.pathname + '?t=' + encodeURIComponent(current.token) + '#ticket');
+  history.replaceState(null, '', BASE + 'ticket/' + encodeURIComponent(current.token) + '#ticket');
   route();
 }
-const ticketLink = () => location.origin + location.pathname + '?t=' + encodeURIComponent(current.token);
-function shareText() { return `🎄 CHRISTMAS PARTY — ${current.name}'s ticket (${current.ticketId})\n${EVENT.dateLong} · ${EVENT.time} · ${EVENT.v1}, ${EVENT.v2}\n${ticketLink()}`; }
+const ticketLink = () => location.origin + BASE + 'ticket/' + encodeURIComponent(current.token);
+function shareText() { return `🎄 CHRISTMAS PARTY — ${current.nickname}'s ticket (${current.ticketId})\n${EVENT.dateLong} · ${EVENT.time} · ${EVENT.v1}, ${EVENT.v2}\n${ticketLink()}`; }
 async function renderTicketPng(kind) {
   const node = kind === 'wide' ? $('#stW').firstElementChild : $('#stT').firstElementChild;
-  const o = { pixelRatio: 2.5, width: kind === 'wide' ? 1200 : 420, height: kind === 'wide' ? 520 : 900 };
+  const o = { pixelRatio: 2.5, width: kind === 'wide' ? 1200 : 420, height: kind === 'wide' ? 520 : 950 };
   await htmlToImage.toPng(node, o).catch(() => null);
   return htmlToImage.toPng(node, o);
 }
@@ -13643,7 +13638,7 @@ $('#aPdf').onclick = async () => {
     if (await save(`${current.ticketId}-Christmas-Party-Ticket.pdf`, pdf.output('arraybuffer'))) $('#tStatus').textContent = 'PDF saved 🎄'; else $('#tStatus').textContent = ''; }
   catch { $('#tStatus').textContent = 'Could not create the PDF.'; } finally { b.disabled = false; }
 };
-$('#aCopy').onclick = async () => { try { await navigator.clipboard.writeText(ticketLink()); toast('Ticket link copied ✨'); } catch { toast(ticketLink()); } };
+$('#aCopy').onclick = async () => { try { await navigator.clipboard.writeText(ticketLink()); toast('Private ticket link copied ✨'); } catch { toast(ticketLink()); } };
 $('#aShare').onclick = async () => {
   try {
     if (navigator.share) {
@@ -13659,7 +13654,7 @@ $('#aShare').onclick = async () => {
 async function lookup({ token, ticketId }) {
   const r = (await rpc('admin_lookup', { p_token: token || null, p_ticket_id: ticketId || null }))[0];
   if (!r || r.result === 'invalid') return { kind: 'invalid' };
-  const g = { id: r.id, ticketId: r.ticket_id, name: r.guest_name, checkedInAt: r.checked_in_at };
+  const g = { id: r.id, ticketId: r.ticket_id, name: r.guest_name, nickname: r.nickname, checkedInAt: r.checked_in_at };
   return { kind: r.result === 'already' ? 'already' : 'valid', g };
 }
 async function checkIn(g) {
@@ -13675,7 +13670,7 @@ function beep(kind) {
     o.connect(g).connect(c.destination); o.start(); o.stop(c.currentTime + .26); } catch {}
 }
 function resultHTML(st, opts = {}) {
-  const who = (g) => `<div class="k">GUEST</div><div class="n">${esc(g.name)}</div><div class="k">TICKET</div><div class="t">${esc(g.ticketId)}</div>`;
+  const who = (g) => `<div class="k">GUEST</div><div class="n">${esc(g.name)}</div>${g.nickname ? `<div style="font-family:'Great Vibes',cursive;font-size:30px;line-height:1.1">${esc(g.nickname)}</div>` : ''}<div class="k">TICKET</div><div class="t">${esc(g.ticketId)}</div>`;
   if (st.kind === 'loading') return `<div class="res neutral"><div class="h">${esc(st.msg || 'Checking ticket…')}</div></div>`;
   if (st.kind === 'valid') return `<div class="res green" role="status"><div class="h">✅ VALID TICKET</div><div style="font-size:19px;opacity:.9">Welcome!</div>${who(st.g)}<button class="rb white" data-act="checkin">CHECK IN GUEST</button><button class="lnk" data-act="next">Cancel — scan another</button></div>`;
   if (st.kind === 'done') return `<div class="res green" role="status"><div class="h">🎄 CHECKED IN!</div>${who(st.g)}<p style="margin:12px 0 0">You can now scan the next ticket.</p>${opts.auto ? '<div class="bar"><i></i></div>' : ''}<button class="rb white" data-act="next">SCAN NEXT TICKET</button></div>`;
@@ -13769,19 +13764,21 @@ function renderAdmin() {
   const tot = guests.length, inn = guests.filter((g) => g.checkedIn).length;
   if (guestsLoaded) { $('#sTot').textContent = tot; $('#sIn').textContent = inn; $('#sOut').textContent = tot - inn; $('#sRate').textContent = (tot ? (inn / tot) * 100 : 0).toFixed(1) + '%'; }
   $('#chips [data-f="all"]').textContent = `All (${tot})`; $('#chips [data-f="in"]').textContent = `✅ Checked in (${inn})`; $('#chips [data-f="out"]').textContent = `⏳ Not checked in (${tot - inn})`;
-  const term = $('#q').value.trim().toLowerCase(), digits = term.replace(/\D/g, '');
+  const term = $('#q').value.trim().toLowerCase();
+  const invByGuest = new Map(invites.filter((i) => i.guest_id).map((i) => [i.guest_id, i]));
   let list = guests.filter((g) => {
     if (filter === 'in' && !g.checkedIn) return false; if (filter === 'out' && g.checkedIn) return false;
     if (!term) return true;
-    return (g.name || '').toLowerCase().includes(term) || (g.ticketId || '').toLowerCase().includes(term) || (digits.length >= 3 && (g.phone || '').includes(digits)) || (g.email || '').toLowerCase().includes(term) || (/^\d{1,4}$/.test(term) && (g.ticketId || '').endsWith('-' + term.padStart(3, '0')));
+    return (g.name || '').toLowerCase().includes(term) || (g.nickname || '').toLowerCase().includes(term) || (g.ticketId || '').toLowerCase().includes(term) || (/^\d{1,4}$/.test(term) && (g.ticketId || '').endsWith('-' + term.padStart(3, '0')));
   }).sort((a, b) => newest ? String(b.createdAt).localeCompare(a.createdAt) : String(a.createdAt).localeCompare(b.createdAt));
   $('#tbody').innerHTML = list.map((g) => `<tr data-t="${esc(g.id)}">
     <td class="tidc">${esc(g.ticketId)}</td><td><b>${esc(g.name)}</b>${g.addedByHost ? ' <span class="pill out" style="font-size:11px">host added</span>' : ''}</td>
-    <td class="nowrap">${esc(g.phone)}</td><td>${esc(g.email || '—')}</td><td class="nowrap">${esc(fmtDT(g.createdAt))}</td>
+    <td><span class="nick">${esc(g.nickname)}</span></td><td class="nowrap">${esc(fmtDT(g.createdAt))}</td>
     <td>${g.checkedIn ? `<span class="pill in">✅ Checked in · ${esc(fmtTime(g.checkedInAt))}</span>` : '<span class="pill out">⏳ Not checked in</span>'}</td>
+    <td>${(() => { const i = invByGuest.get(g.id); return i ? `Invite ${esc(String(i.invite_no).padStart(3, '0'))}${i.label ? ' · ' + esc(i.label) : ''}` : (g.addedByHost ? 'Added by host' : '—'); })()}</td>
     <td><div class="ra"><button class="${g.checkedIn ? '' : 'ci'}" data-a="${g.checkedIn ? 'undo' : 'in'}">${g.checkedIn ? 'Undo' : 'Check in'}</button><button data-a="view">Ticket</button><button class="del" data-a="del">Delete</button></div></td></tr>`).join('');
   const em = $('#empty'); em.classList.toggle('hidden', !guestsLoaded || list.length > 0);
-  em.textContent = tot ? 'No guests match that search.' : 'No tickets yet — create the first one from the guest page or with “Add a guest manually”.';
+  em.textContent = tot ? 'No guests match that search.' : 'No tickets yet — create invitations above and send each guest their link.';
 }
 $('#tbody').addEventListener('click', async (e) => {
   const b = e.target.closest('[data-a]'); if (!b) return;
@@ -13800,31 +13797,67 @@ const csvCell = (v) => { let s = String(v ?? ''); if (/^[=+\-@\t\r]/.test(s)) s 
 $('#csvBtn').onclick = async () => {
   let rows; try { rows = await fetchGuests(); } catch { return toast('Could not load the guest list.'); } // fresh from the database
   rows.sort((a, b) => String(a.createdAt).localeCompare(b.createdAt));
-  const head = ['Ticket ID', 'Guest Name', 'Phone', 'Email', 'Registration Time', 'Check-in Status', 'Check-in Time'];
-  const csv = '﻿' + [head, ...rows.map((g) => [g.ticketId, g.name, g.phone, g.email || '', fmtDT(g.createdAt), g.checkedIn ? 'Checked In' : 'Not Checked In', g.checkedIn ? fmtDT(g.checkedInAt) : ''])].map((r) => r.map(csvCell).join(',')).join('\r\n');
+  const head = ['Name', 'Nickname', 'Ticket ID', 'Registration Time', 'Check-in Status', 'Check-in Time'];
+  const csv = '﻿' + [head, ...rows.map((g) => [g.name, g.nickname, g.ticketId, fmtDT(g.createdAt), g.checkedIn ? 'Checked In' : 'Not Checked In', g.checkedIn ? fmtDT(g.checkedInAt) : ''])].map((r) => r.map(csvCell).join(',')).join('\r\n');
   if (await save(`christmas-party-guests-${new Date().toISOString().slice(0, 10)}.csv`, csv)) toast('Guest list downloaded');
 };
 $('#addToggle').onclick = () => $('#addForm').classList.toggle('hidden');
 $('#addForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const n = cleanName($('#adName').value), p = normPhone($('#adPhone').value), m = cleanEmail($('#adEmail').value);
-  if (!n) return showErr('#adErr', 'Enter a valid name.'); if (!p) return showErr('#adErr', 'Enter a valid phone number.'); if (m === false) return showErr('#adErr', 'Invalid e-mail.');
+  const n = cleanName($('#adName').value), k = cleanNick($('#adNick').value);
+  if (!n) return showErr('#adErr', 'Enter a valid name.'); if (!k) return showErr('#adErr', 'Nickname: 3–24 letters or numbers (- _ . allowed, no spaces).');
   showErr('#adErr', '');
-  try { const r = await registerGuest(n, p, m, $('#adDup').checked, true);
-    if (r.status === 'duplicate') return showErr('#adErr', `That phone already has ticket ${r.guest.ticketId}. Tick “Allow the same phone number” to add another person anyway.`);
+  try { const r = await registerGuest(n, k, true);
+    if (r.status === 'nickname_taken') return showErr('#adErr', '❌ This Christmas nickname is already taken. Please choose another one.');
+    if (r.status !== 'created') return showErr('#adErr', 'Please check the name and nickname.');
     $('#addForm').reset(); toast(`Created ${r.guest.ticketId} for ${n}`); openTicket(r.guest, true);
   } catch (err) { showErr('#adErr', (err && err.message) || 'Could not create the ticket.'); }
 });
 $('#saveSet').onclick = async () => {
   const v = $('#maxG').value.trim(), max = v ? parseInt(v, 10) : null;
   if (v && !(max > 0)) return toast('Ticket limit must be a number.');
-  const code = $('#pCode').value.trim().toUpperCase();
-  if (code && !/^[A-Z0-9-]{3,40}$/.test(code)) return toast('Invite code: letters, numbers and dashes only.');
-  try { await rpc('admin_set_registration', { p_open: $('#regOpen').checked, p_max: max, p_code: code || null }); $('#pCode').value = code; showInvite(code); toast('Saved'); } catch (err) { toast((err && err.message) || 'Could not save.'); }
+  try { await rpc('admin_set_registration', { p_open: $('#regOpen').checked, p_max: max }); toast('Saved'); } catch (err) { toast((err && err.message) || 'Could not save.'); }
 };
-$('#invCopy').onclick = async () => { try { await navigator.clipboard.writeText($('#invLink').value); toast('Invite link copied'); } catch { $('#invLink').select(); } };
+/* ---------- invitations (host) ---------- */
+function inviteStatus(i) { return i.revoked_at ? 'Revoked' : i.used_at ? 'Used' : 'Unused'; }
+function renderInvites() {
+  const gById = new Map(guests.map((g) => [g.id, g]));
+  const c = { Unused: 0, Used: 0, Revoked: 0 }; invites.forEach((i) => c[inviteStatus(i)]++);
+  $('#invStats').innerHTML = `<span class="pill out">${invites.length} created</span><span class="pill out">${c.Unused} unused</span><span class="pill in">${c.Used} used</span><span class="pill rev">${c.Revoked} revoked</span>`;
+  $('#invBody').innerHTML = invites.slice().reverse().map((i) => {
+    const st = inviteStatus(i), g = i.guest_id ? gById.get(i.guest_id) : null;
+    const pill = st === 'Used' ? 'in' : st === 'Revoked' ? 'rev' : 'out';
+    const guest = g ? `<b>${esc(g.name)}</b> · <span class="nick" style="font-size:19px">${esc(g.nickname)}</span> · ${esc(g.ticketId)}` : (st === 'Used' ? '<i>guest deleted</i>' : '—');
+    const act = st === 'Unused' ? `<button class="ci" data-i="copy">Copy link</button><button class="del" data-i="revoke">Revoke</button>`
+      : st === 'Used' && g ? `<button data-i="view">View ticket</button>` : '—';
+    return `<tr data-id="${esc(i.id)}"><td class="tidc">Invite ${esc(String(i.invite_no).padStart(3, '0'))}${i.label ? `<div style="font-family:Lora,serif;font-weight:400;color:var(--muted);font-size:13px">${esc(i.label)}</div>` : ''}</td>
+      <td><span class="pill ${pill}">${st}</span></td><td>${guest}</td><td><div class="ra">${act}</div></td></tr>`;
+  }).join('');
+  $('#invEmpty').classList.toggle('hidden', invites.length > 0);
+}
+$('#invForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const n = parseInt($('#invCount').value, 10) || 1; if (n < 1 || n > 50) return toast('Create between 1 and 50 at a time.');
+  try {
+    const rows = await rpc('admin_create_invites', { p_count: n, p_label: $('#invLabel').value.trim() || null });
+    $('#invLabel').value = ''; $('#invCount').value = '1'; await reloadGuests();
+    if (rows.length === 1) { try { await navigator.clipboard.writeText(inviteUrl(rows[0].token)); toast(`Invite ${String(rows[0].invite_no).padStart(3, '0')} created — link copied`); } catch { toast(`Invite ${String(rows[0].invite_no).padStart(3, '0')} created`); } }
+    else toast(`${rows.length} invitations created`);
+  } catch (err) { toast((err && err.message) || 'Could not create invitations.'); }
+});
+$('#invBody').addEventListener('click', async (e) => {
+  const b = e.target.closest('[data-i]'); if (!b) return;
+  const inv = invites.find((x) => x.id === b.closest('tr').dataset.id); if (!inv) return;
+  if (b.dataset.i === 'copy') { const u = inviteUrl(inv.token); try { await navigator.clipboard.writeText(u); toast('Invitation link copied'); } catch { await ask('Invitation link', u, 'Done'); } }
+  if (b.dataset.i === 'view') { const g = guests.find((x) => x.id === inv.guest_id); if (g) openTicket(g, false); }
+  if (b.dataset.i === 'revoke') {
+    if (!(await ask(`Revoke Invite ${String(inv.invite_no).padStart(3, '0')}?`, 'This link will stop working. Nobody can register with it afterwards.', 'Revoke'))) return;
+    try { const r = await rpc('admin_revoke_invite', { p_id: inv.id }); toast(r === 'revoked' ? 'Invitation revoked' : r === 'used' ? 'Already used — can’t revoke' : 'Not found'); reloadGuests(); }
+    catch (err) { toast((err && err.message) || 'Could not revoke.'); }
+  }
+});
 $('#resetBtn').onclick = async () => {
-  if (!(await ask('Clear all guests?', 'Every ticket, check-in and phone number will be deleted and numbering restarts at XMAS-001. Use this after testing, before sending real invites.', 'Delete everything'))) return;
+  if (!(await ask('Clear all guests and invitations?', 'Every ticket, check-in and invitation link will be deleted. Numbering restarts at XMAS-001 and Invite 001. Use this after testing, before sending real invitations.', 'Delete everything'))) return;
   try { await rpc('admin_reset_all'); toast('All guest data cleared'); reloadGuests(); }
   catch (err) { toast((err && err.message) || 'Could not clear everything.'); }
 };
@@ -13833,11 +13866,19 @@ $('#resetBtn').onclick = async () => {
 decorate();
 window.addEventListener('hashchange', route);
 (async () => {
-  const t = new URLSearchParams(location.search).get('t');
-  if (t && TOKEN_RE.test(t.trim().toUpperCase())) {
-    try { const g = await ticketByToken(t.trim().toUpperCase()); if (g) openTicket(g, false); else { history.replaceState(null, '', location.pathname); location.hash = 'find'; toast('That ticket link isn’t valid.'); } } catch {}
+  applyInviteState('none');
+  if (pathAdmin && !location.hash) location.hash = 'admin';
+  if (pathTicket) {
+    let g = null; if (TOKEN_RE.test(pathTicket)) { try { g = await ticketByToken(pathTicket); } catch {} }
+    if (g) openTicket(g, false); else { history.replaceState(null, '', BASE); toast('That ticket link isn’t valid.'); }
+  } else if (pathInvite) {
+    let st = 'invalid';
+    if (INVITE_RE.test(pathInvite)) { try { st = await rpc('check_invite', { p_token: pathInvite }); } catch { st = 'invalid'; } }
+    if (st === 'valid') inviteToken = pathInvite;
+    applyInviteState(st);
+    if (!location.hash) history.replaceState(null, '', location.pathname + '#register');
   }
-  route(); guestSettings();
+  route();
   sb.auth.onAuthStateChange((ev) => { if (ev === 'SIGNED_OUT' || ev === 'TOKEN_REFRESHED') {} });
   await refreshAuth();
   if (fromEmailLink) { if (linkError) { location.hash = 'admin'; showErr('#lErr', 'That sign-in link has expired or was already used — please ask for a new one.'); } else location.hash = 'admin'; }
